@@ -1,22 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Explorer 🎮</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Game Vault</title>
+    <meta name="description" content="A Steam-inspired game database using RAWG API.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon"><circle cx="12" cy="12" r="10"></circle><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path><path d="M12 12v10"></path></svg>
+            <h2>Retro Game Vault</h2>
+        </div>
+        <div class="nav-center">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for games..." autocomplete="off">
+            </div>
+        </div>
+        <div class="nav-right">
+            <button id="viewWishlistBtn" class="nav-btn">Wishlist</button>
+            <button id="toggleCompareBtn" class="nav-btn bg-accent">Compare Mode: OFF</button>
+        </div>
+    </header>
 
-  <header>
-    <h1>🎮 Game Explorer</h1>
-    <input type="text" id="searchInput" placeholder="Search games..." />
-    <button onclick="handleSearch()">Search</button>
-  </header>
+    <!-- Main Layout Container -->
+    <div class="app-container">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar">
+            <h3>Platforms</h3>
+            <ul class="filter-list" id="platformFilters">
+                <li><button class="filter-btn active" data-platform="">All Platforms</button></li>
+                <li><button class="filter-btn" data-platform="1">PC</button></li>
+                <li><button class="filter-btn" data-platform="2">PlayStation</button></li>
+                <li><button class="filter-btn" data-platform="3">Xbox</button></li>
+                <li><button class="filter-btn" data-platform="7">Nintendo</button></li>
+                <li><button class="filter-btn" data-platform="4">iOS</button></li>
+                <li><button class="filter-btn" data-platform="8">Android</button></li>
+            </ul>
+        </aside>
 
-  <p id="loader">Loading games...</p>
-  <div id="games" class="container"></div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <h2 id="sectionTitle">Trending Games</h2>
+            
+            <div id="gameGrid" class="game-grid">
+                <!-- Game cards will be injected here via JS -->
+            </div>
+            
+            <div id="loadingIndicator" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Loading games...</p>
+            </div>
+            
+            <div class="pagination">
+                <button id="loadMoreBtn" class="btn hidden">Load More</button>
+            </div>
+        </main>
+    </div>
 
-  <script src="script.js"></script>
+    <!-- Game Details Modal -->
+    <dialog id="detailsModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeDetailsBtn">&times;</button>
+            <div id="detailsModalBody">
+                <!-- Details injected here -->
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Compare Modal -->
+    <dialog id="compareModal" class="modal">
+        <div class="modal-content compare-content">
+            <button class="close-btn" id="closeCompareBtn">&times;</button>
+            <h2>Head-to-Head Comparison</h2>
+            <div class="compare-grid" id="compareGrid">
+                <!-- Comparison injected here -->
+            </div>
+        </div>
+    </dialog>
+
+    <script src="script.js"></script>
 </body>
 </html>
